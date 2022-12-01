@@ -3,19 +3,20 @@
 -include("aoc.hrl").
 
 solve(Input) ->
-   {part1(?ints(Input)), part2(?ints(Input))}.
+   {part1(Input), part2(Input)}.
 
-part1([]) ->
-    ok.
+part1(Input) ->
+    lists:max(sum_calories(Input)).
 
-part2(L) ->
-    L.
+part2(Input) ->
+    [A, B, C | _] = lists:reverse(lists:sort(sum_calories(Input))),
+    A + B + C.
+
+sum_calories(Input) ->
+    [lists:sum(?ints(X)) || X <- ?split(Input, "\n\n")].
 
 -include_lib("eunit/include/eunit.hrl").
 solve_test_() ->
-    L = [],
-    [ ?_assertEqual(ok, part1(L))
-    , ?_assertEqual(ok, part2(L))
-%%     , ?_assertEqual({_, _}, ?solve_ex(1))
-%%     , ?_assertEqual({_, _}, ?solve())
+    [ ?_assertEqual({24000, 45000}, ?solve_ex(1))
+    , ?_assertEqual({66487, 197301}, ?solve())
     ].
