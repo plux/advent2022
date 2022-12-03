@@ -10,6 +10,12 @@
 -define(split(X, Sep), aoc:split(X, Sep)).
 -define(solve_ex(X),
         aoc:solve(?MODULE, "input_ex/" ++ ?MODULE_STRING ++ "_1.txt")).
+-define(l(Fmt, Args), io:format("DEBUG: ~p:~p:~p - " ++ Fmt ++ "\n",
+                                [?MODULE,
+                                 ?FUNCTION_NAME,
+                                 ?LINE|Args])).
+-define(l(Fmt), ?l(Fmt, [])).
+-define(v(X), ?l("~s = ~p\n", [(??X), (X)]), (X)).
 
 %%      N              {0,-1}
 %%   NW | NE      {-1,-1}|{1,-1}
