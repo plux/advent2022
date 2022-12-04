@@ -8,6 +8,7 @@
 -define(ints_lines(X), [?ints(Line) || Line <- ?lines(X)]).
 -define(int_lines(X), [?int(Line) || Line <- ?lines(X)]).
 -define(split(X, Sep), aoc:split(X, Sep)).
+-define(chunks(L, N), aoc:chunks(L, N)).
 -define(solve_ex(X),
         aoc:solve(?MODULE, "input_ex/" ++ ?MODULE_STRING ++ "_1.txt")).
 -define(l(Fmt, Args), io:format("DEBUG: ~p:~p:~p - " ++ Fmt ++ "\n",

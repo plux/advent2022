@@ -136,6 +136,18 @@ to_char("#..#\n#..#\n#..#\n#..#\n#..#\n.##.\n") -> $U;
 to_char("#...\n#...\n.#.#\n..#.\n..#.\n..#.\n") -> $Y;
 to_char("####\n...#\n..#.\n.#..\n#...\n####\n") -> $Z.
 
+chunks([], _) ->
+    [];
+chunks(L, N) when is_list(L), is_integer(N) ->
+    try
+        {Chunk, Rest} = lists:split(N, L),
+        [Chunk|chunks(Rest, N)]
+    catch
+        _:_ ->
+            %% List is smaller than N
+            [L]
+    end.
+
 %% Solve ---------------------------------------------------------------
 solve(Mod) when is_atom(Mod) ->
     {ok, Input} = file:read_file("input/" ++ atom_to_list(Mod) ++ ".txt"),
