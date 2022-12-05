@@ -16,7 +16,7 @@
                                  ?FUNCTION_NAME,
                                  ?LINE|Args])).
 -define(l(Fmt), ?l(Fmt, [])).
--define(v(X), ?l("~s = ~p\n", [(??X), (X)]), (X)).
+-define(v(X), begin ?l("~s = ~p\n", [(??X), (X)]), (X) end).
 
 %%      N              {0,-1}
 %%   NW | NE      {-1,-1}|{1,-1}
