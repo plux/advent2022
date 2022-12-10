@@ -9,8 +9,13 @@
 -define(int_lines(X), [?int(Line) || Line <- ?lines(X)]).
 -define(split(X, Sep), aoc:split(X, Sep)).
 -define(chunks(L, N), aoc:chunks(L, N)).
+-define(chunk_every(L, N), aoc:chunk_every(L, N)).
+-define(uniq(L), lists:uniq(L)).
+-define(find_index(Pred, L), aoc:find_index(Pred, L)).
 -define(solve_ex(X),
-        aoc:solve(?MODULE, "input_ex/" ++ ?MODULE_STRING ++ "_1.txt")).
+        aoc:solve(?MODULE, "input_ex/" ++ ?MODULE_STRING ++ "_"
+                  ++ integer_to_list(X) ++ ".txt")).
+-define(take(N, L), lists:sublist(L, N)).
 -define(l(Fmt, Args), io:format("DEBUG: ~p:~p:~p - " ++ Fmt ++ "\n",
                                 [?MODULE,
                                  ?FUNCTION_NAME,
