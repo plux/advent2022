@@ -64,6 +64,12 @@ draw_grid(Grid) ->
 draw_grid(Grid, From, To) ->
     io:format("~s", [grid_to_string(Grid, From, To)]).
 
+grid_rows(Grid) ->
+    {ToX, ToY} = lists:max(maps:keys(Grid)),
+    [ [{X, Y, maps:get({X, Y}, Grid)} || X <- lists:seq(0, ToX)]
+      || Y <- lists:seq(0, ToY)].
+
+
 -spec enumerate([X]) -> [{integer(), X}].
 enumerate(L) ->
     lists:zip(lists:seq(0, length(L)-1), L).
@@ -146,6 +152,32 @@ chunks(L, N) when is_list(L), is_integer(N) ->
         _:_ ->
             %% List is smaller than N
             [L]
+    end.
+
+chunk_every([], _) ->
+    [];
+chunk_every(L, N) when is_list(L), is_integer(N) ->
+    try
+        Chunk = lists:sublist(L, N),
+        [Chunk|chunk_every(tl(L), N)]
+    catch
+        _:_ ->
+            %% List is smaller than Np
+            [L]
+    end.
+
+%% @doc find 0-based index where Pred matches
+find_index(Pred, L) ->
+    find_index(Pred, L, 0).
+
+find_index(_Pred, [], _N) ->
+    error;
+find_index(Pred, [H|T], N) ->
+    case Pred(H) of
+        true ->
+            N;
+        false ->
+            find_index(Pred, T, N + 1)
     end.
 
 %% Solve ---------------------------------------------------------------
