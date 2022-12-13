@@ -24,5 +24,5 @@ fi
 echo "Launching firefox."
 firefox "${URL}"
 echo "Launching emacs."
-emacsclient -c -n -a emacs "${ERL_FILE}" "${INPUT_FILE}" "${EX_FILE}" &
+emacsclient -n -a emacs "${ERL_FILE}" "${INPUT_FILE}" "${EX_FILE}" &
 echo ${ERL_FILE} | entr -s "rebar3 eunit -m day${DAY}"
