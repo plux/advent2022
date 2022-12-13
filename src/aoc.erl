@@ -180,6 +180,9 @@ find_index(Pred, [H|T], N) ->
             find_index(Pred, T, N + 1)
     end.
 
+product(L) ->
+    lists:foldl(fun erlang:'*'/2, 1, L).
+
 %% Solve ---------------------------------------------------------------
 solve(Mod) when is_atom(Mod) ->
     {ok, Input} = file:read_file("input/" ++ atom_to_list(Mod) ++ ".txt"),
