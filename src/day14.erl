@@ -14,14 +14,9 @@ to_line([_,_]) ->
 to_line([FromX, FromY | [ToX, ToY | _] = Rest]) ->
     [to_line(FromX, FromY, ToX, ToY) | to_line(Rest)].
 
-to_line(X, FromY, X, ToY) when FromY < ToY ->
-    [{{X, Y}, $#} || Y <- lists:seq(FromY, ToY)];
-to_line(X, FromY, X, ToY) ->
-    [{{X, Y}, $#} || Y <- lists:seq(ToY, FromY)];
-to_line(FromX, Y, ToX, Y) when FromX < ToX ->
-    [{{X, Y}, $#} || X <- lists:seq(FromX, ToX)];
-to_line(FromX, Y, ToX, Y) ->
-    [{{X, Y}, $#} || X <- lists:seq(ToX, FromX)].
+to_line(FromX, FromY, ToX, ToY) ->
+    [{{X, Y}, $#} || Y <- lists:seq(min(FromY, ToY), max(FromY, ToY)),
+                     X <- lists:seq(min(FromX, ToX), max(FromX, ToX))].
 
 -define(start, {500, 0}).
 part(Grid, Part) ->
