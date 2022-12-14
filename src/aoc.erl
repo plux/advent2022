@@ -66,7 +66,7 @@ draw_grid(Grid, From, To) ->
 
 grid_rows(Grid) ->
     {ToX, ToY} = lists:max(maps:keys(Grid)),
-    [ [{X, Y, maps:get({X, Y}, Grid)} || X <- lists:seq(0, ToX)]
+    [ [{{X, Y}, maps:get({X, Y}, Grid)} || X <- lists:seq(0, ToX)]
       || Y <- lists:seq(0, ToY)].
 
 
